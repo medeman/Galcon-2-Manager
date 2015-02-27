@@ -5,6 +5,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using System.Security.Cryptography;
 
 namespace Galcon_2_Manager.IM
 {
@@ -17,8 +18,7 @@ namespace Galcon_2_Manager.IM
         public StatusUpdatedEventArgs(InstallStatus installStatus, int progress = 0)
         {
             this.installStatus = installStatus;
-            if (progress != null)
-                this.progress = progress;
+            this.progress = progress;
         }
 
         public InstallStatus installStatus;
@@ -86,6 +86,16 @@ namespace Galcon_2_Manager.IM
             wc.DownloadProgressChanged += (object sender, DownloadProgressChangedEventArgs e) =>
             {
                 this.StatusUpdated(this, new StatusUpdatedEventArgs(installStatus, e.ProgressPercentage));
+            };
+
+            wc.DownloadFileCompleted += (object sender, System.ComponentModel.AsyncCompletedEventArgs e) =>
+            {
+                SHA256 shaChecksum = SHA256.Create();
+
+                FileStream fs = new FileStream(@"cache\Galcon2.zip", FileMode.Open);
+                fs.Position = 0;
+
+                string hash = BitConverter.ToString(shaChecksum.ComputeHash(fs)).Replace("-", string.Empty);
             };
 
             wc.DownloadFileAsync(new Uri("https://www.galcon.com/g2/files/latest/Galcon2.zip"), @"cache\Galcon2.zip");
