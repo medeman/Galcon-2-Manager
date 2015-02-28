@@ -161,7 +161,10 @@ namespace Galcon_2_Manager
 
         private void buttonInstallRemove_Click(object sender, EventArgs e)
         {
-            im.uninstall();
+            DialogResult remove = MessageBox.Show("Do you want to uninstall Galcon 2?", "Confirm", MessageBoxButtons.YesNo);
+
+            if (remove == DialogResult.Yes)
+                im.uninstall();
         }
 
         private void buttonLaunch_Click(object sender, EventArgs e)

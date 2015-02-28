@@ -59,8 +59,6 @@ namespace Galcon_2_Manager.IM
 
         private void prepare()
         {
-            if (!Directory.Exists("game"))
-                Directory.CreateDirectory("game");
             if (!Directory.Exists("cache"))
                 Directory.CreateDirectory("cache");
         }
@@ -159,7 +157,10 @@ namespace Galcon_2_Manager.IM
 
         public void uninstall()
         {
+            // Delete the game folder (we should probably clear the cache folder as well?).
 
+            if (Directory.Exists("game"))
+                Directory.Delete("game", true);
         }
 
         private void calculateCacheHash()
