@@ -166,7 +166,7 @@ namespace Galcon_2_Manager
 
         private void buttonLaunch_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start(@"game\galcon2.exe");
+            im.launch();
         }
 
         private void buttonLaunch_EnabledChanged(object sender, EventArgs e)

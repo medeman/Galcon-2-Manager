@@ -5,6 +5,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using System.Diagnostics;
 using System.Security.Cryptography;
 
 namespace Galcon_2_Manager.IM
@@ -50,7 +51,7 @@ namespace Galcon_2_Manager.IM
 
         public void init()
         {
-            this.StatusUpdated(this, new StatusUpdatedEventArgs(installStatus));
+            this.sendStatusUpdatedEvent();
             this.prepare();
         }
 
@@ -88,7 +89,7 @@ namespace Galcon_2_Manager.IM
                     this.hashLatest = System.Text.Encoding.UTF8.GetString(raw).Trim();
                 }
 
-                this.StatusUpdated(this, new StatusUpdatedEventArgs(installStatus));
+                this.sendStatusUpdatedEvent();
             };
 
             wc.DownloadDataAsync(new Uri("http://f00b4r.org/g2/hash/latest/windows.txt"));
@@ -116,7 +117,7 @@ namespace Galcon_2_Manager.IM
                 wc.DownloadFileCompleted += (object sender, System.ComponentModel.AsyncCompletedEventArgs e) =>
                 {
                     this.installStatus = InstallStatus.Verifying;
-                    this.StatusUpdated(this, new StatusUpdatedEventArgs(installStatus));
+                    this.sendStatusUpdatedEvent();
                     this.calculateCacheHash();
                     this.extract();
                 };
@@ -135,9 +136,13 @@ namespace Galcon_2_Manager.IM
                     Directory.Delete(@"cache\Galcon2", true);
 
                 installStatus = InstallStatus.Installing;
+                this.sendStatusUpdatedEvent();
 
                 System.IO.Compression.ZipFile.ExtractToDirectory(@"cache\Galcon2.zip", "cache");
                 Directory.Move(@"cache\Galcon2", "game");
+
+                installStatus = InstallStatus.UpToDate;
+                this.sendStatusUpdatedEvent();
             }
             else
             {
@@ -172,6 +177,20 @@ namespace Galcon_2_Manager.IM
         private bool compareHashs(string hashA, string hashB)
         {
             return hashA == hashB;
+        }
+
+        private void sendStatusUpdatedEvent()
+        {
+            this.StatusUpdated(this, new StatusUpdatedEventArgs(installStatus));
+        }
+
+        public void launch()
+        {
+            ProcessStartInfo startInfo = new ProcessStartInfo();
+            startInfo.WorkingDirectory = Directory.GetCurrentDirectory() + @"\game";
+            startInfo.FileName = Directory.GetCurrentDirectory() + @"\game\galcon2.exe";
+
+            Process.Start(startInfo);
         }
     }
 }
