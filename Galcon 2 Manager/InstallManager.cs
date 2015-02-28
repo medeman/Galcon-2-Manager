@@ -80,7 +80,7 @@ namespace Galcon_2_Manager.IM
         {
             if (File.Exists(@"cache\Galcon2.zip"))
             {
-                calculateCacheHash();
+                this.calculateCacheHash();
             }
             else
             {
@@ -96,7 +96,7 @@ namespace Galcon_2_Manager.IM
 
                 wc.DownloadFileCompleted += (object sender, System.ComponentModel.AsyncCompletedEventArgs e) =>
                 {
-                    calculateCacheHash();
+                    this.calculateCacheHash();
                 };
 
                 wc.DownloadFileAsync(new Uri("https://www.galcon.com/g2/files/latest/Galcon2.zip"), @"cache\Galcon2.zip");
@@ -113,14 +113,14 @@ namespace Galcon_2_Manager.IM
 
         }
 
-        private string calculateCacheHash()
+        private void calculateCacheHash()
         {
             SHA256 shaChecksum = SHA256.Create();
 
             FileStream fs = new FileStream(@"cache\Galcon2.zip", FileMode.Open);
             fs.Position = 0;
 
-            return BitConverter.ToString(shaChecksum.ComputeHash(fs)).Replace("-", string.Empty).ToLower();
+            this.hashCache = BitConverter.ToString(shaChecksum.ComputeHash(fs)).Replace("-", string.Empty).ToLower();
         }
     }
 }
