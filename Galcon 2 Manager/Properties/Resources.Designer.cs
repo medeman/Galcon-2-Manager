@@ -83,6 +83,26 @@ namespace Galcon_2_Manager.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap button_launch {
+            get {
+                object obj = ResourceManager.GetObject("button_launch", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap button_launch_disabled {
+            get {
+                object obj = ResourceManager.GetObject("button_launch_disabled", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap button_minimize {
             get {
                 object obj = ResourceManager.GetObject("button_minimize", resourceCulture);

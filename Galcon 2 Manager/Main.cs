@@ -27,6 +27,8 @@ namespace Galcon_2_Manager
         {
             InitializeComponent();
 
+            buttonLaunch.FlatAppearance.BorderSize = 0;
+
             im.StatusUpdated += (object sender, StatusUpdatedEventArgs e) =>
             {
                 switch (e.installStatus)
@@ -36,66 +38,77 @@ namespace Galcon_2_Manager
                         buttonInstall.Enabled = false;
                         buttonInstallRemove.Enabled = false;
                         buttonInstallUpdate.Enabled = false;
+                        buttonLaunch.Enabled = false;
                         break;
                     case InstallStatus.UpToDate:
                         labelInstallStatus.Text = "Status: Up to date!";
                         buttonInstall.Enabled = false;
                         buttonInstallRemove.Enabled = true;
                         buttonInstallUpdate.Enabled = false;
+                        buttonLaunch.Enabled = true;
                         break;
                     case InstallStatus.NotChecked:
                         labelInstallStatus.Text = "Status: Not checked.";
                         buttonInstall.Enabled = false;
                         buttonInstallRemove.Enabled = false;
                         buttonInstallUpdate.Enabled = false;
+                        buttonLaunch.Enabled = false;
                         break;
                     case InstallStatus.NotInstalled:
                         labelInstallStatus.Text = "Status: Not installed.";
                         buttonInstall.Enabled = true;
                         buttonInstallRemove.Enabled = false;
                         buttonInstallUpdate.Enabled = false;
+                        buttonLaunch.Enabled = false;
                         break;
                     case InstallStatus.Outdated:
                         labelInstallStatus.Text = "Status: Outdated!";
                         buttonInstall.Enabled = false;
                         buttonInstallRemove.Enabled = true;
                         buttonInstallUpdate.Enabled = true;
+                        buttonLaunch.Enabled = true;
                         break;
                     case InstallStatus.OfflineInstalled:
                         labelInstallStatus.Text = "Status: Offline (installed)";
                         buttonInstall.Enabled = false;
                         buttonInstallRemove.Enabled = true;
                         buttonInstallUpdate.Enabled = false;
+                        buttonLaunch.Enabled = true;
                         break;
                     case InstallStatus.OfflineNotInstalled:
                         labelInstallStatus.Text = "Status: Offline (not installed)";
                         buttonInstall.Enabled = false;
                         buttonInstallRemove.Enabled = false;
                         buttonInstallUpdate.Enabled = false;
+                        buttonLaunch.Enabled = false;
                         break;
                     case InstallStatus.Downloading:
                         labelInstallStatus.Text = "Status: Downloading (" + e.progress + " %)";
                         buttonInstall.Enabled = false;
                         buttonInstallRemove.Enabled = false;
                         buttonInstallUpdate.Enabled = false;
+                        buttonLaunch.Enabled = false;
                         break;
                     case InstallStatus.Verifying:
                         labelInstallStatus.Text = "Status: Verifying...";
                         buttonInstall.Enabled = false;
                         buttonInstallRemove.Enabled = false;
                         buttonInstallUpdate.Enabled = false;
+                        buttonLaunch.Enabled = false;
                         break;
                     case InstallStatus.ChecksumMismatch:
                         labelInstallStatus.Text = "Status: Checksum mismatch.";
                         buttonInstall.Enabled = false;
                         buttonInstallRemove.Enabled = false;
                         buttonInstallUpdate.Enabled = false;
+                        buttonLaunch.Enabled = false;
                         break;
                     case InstallStatus.Installing:
                         labelInstallStatus.Text = "Status: Installing...";
                         buttonInstall.Enabled = false;
                         buttonInstallRemove.Enabled = false;
                         buttonInstallUpdate.Enabled = false;
+                        buttonLaunch.Enabled = false;
                         break;
                 }
             };
@@ -149,6 +162,19 @@ namespace Galcon_2_Manager
         private void buttonInstallRemove_Click(object sender, EventArgs e)
         {
             im.uninstall();
+        }
+
+        private void buttonLaunch_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start(@"game\galcon2.exe");
+        }
+
+        private void buttonLaunch_EnabledChanged(object sender, EventArgs e)
+        {
+            if (buttonLaunch.Enabled)
+                buttonLaunch.BackgroundImage = Galcon_2_Manager.Properties.Resources.button_launch;
+            else
+                buttonLaunch.BackgroundImage = Galcon_2_Manager.Properties.Resources.button_launch_disabled;
         }
     }
 }

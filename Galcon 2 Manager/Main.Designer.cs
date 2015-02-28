@@ -40,6 +40,7 @@
             this.webBrowserNews = new System.Windows.Forms.WebBrowser();
             this.labelTitle = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.buttonLaunch = new System.Windows.Forms.Button();
             this.groupBoxInstall.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -202,6 +203,22 @@
             this.panel1.Size = new System.Drawing.Size(174, 46);
             this.panel1.TabIndex = 5;
             // 
+            // buttonLaunch
+            // 
+            this.buttonLaunch.BackColor = System.Drawing.Color.Transparent;
+            this.buttonLaunch.BackgroundImage = global::Galcon_2_Manager.Properties.Resources.button_launch_disabled;
+            this.buttonLaunch.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.buttonLaunch.Enabled = false;
+            this.buttonLaunch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonLaunch.ForeColor = System.Drawing.Color.Transparent;
+            this.buttonLaunch.Location = new System.Drawing.Point(46, 180);
+            this.buttonLaunch.Name = "buttonLaunch";
+            this.buttonLaunch.Size = new System.Drawing.Size(128, 128);
+            this.buttonLaunch.TabIndex = 9;
+            this.buttonLaunch.UseVisualStyleBackColor = false;
+            this.buttonLaunch.EnabledChanged += new System.EventHandler(this.buttonLaunch_EnabledChanged);
+            this.buttonLaunch.Click += new System.EventHandler(this.buttonLaunch_Click);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -209,6 +226,7 @@
             this.BackgroundImage = global::Galcon_2_Manager.Properties.Resources.background_main;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(800, 500);
+            this.Controls.Add(this.buttonLaunch);
             this.Controls.Add(this.labelTitle);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.webBrowserNews);
@@ -240,6 +258,7 @@
         private System.Windows.Forms.WebBrowser webBrowserNews;
         private System.Windows.Forms.Label labelTitle;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button buttonLaunch;
     }
 }
 
