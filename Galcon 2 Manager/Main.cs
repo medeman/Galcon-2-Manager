@@ -73,8 +73,26 @@ namespace Galcon_2_Manager
                         buttonInstallRemove.Enabled = false;
                         buttonInstallUpdate.Enabled = false;
                         break;
-                    case InstallStatus.Updating:
-                        labelInstallStatus.Text = "Status: Installing (" + e.progress + " %)";
+                    case InstallStatus.Downloading:
+                        labelInstallStatus.Text = "Status: Downloading (" + e.progress + " %)";
+                        buttonInstall.Enabled = false;
+                        buttonInstallRemove.Enabled = false;
+                        buttonInstallUpdate.Enabled = false;
+                        break;
+                    case InstallStatus.Verifying:
+                        labelInstallStatus.Text = "Status: Verifying...";
+                        buttonInstall.Enabled = false;
+                        buttonInstallRemove.Enabled = false;
+                        buttonInstallUpdate.Enabled = false;
+                        break;
+                    case InstallStatus.ChecksumMismatch:
+                        labelInstallStatus.Text = "Status: Checksum mismatch.";
+                        buttonInstall.Enabled = false;
+                        buttonInstallRemove.Enabled = false;
+                        buttonInstallUpdate.Enabled = false;
+                        break;
+                    case InstallStatus.Installing:
+                        labelInstallStatus.Text = "Status: Installing...";
                         buttonInstall.Enabled = false;
                         buttonInstallRemove.Enabled = false;
                         buttonInstallUpdate.Enabled = false;

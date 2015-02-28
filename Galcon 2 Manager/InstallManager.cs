@@ -9,7 +9,20 @@ using System.Security.Cryptography;
 
 namespace Galcon_2_Manager.IM
 {
-    public enum InstallStatus { Checking, NotChecked, NotInstalled, Outdated, UpToDate, OfflineInstalled, OfflineNotInstalled, Updating };
+    // Contains all possible states the installation can be in.
+    public enum InstallStatus {
+        Checking,
+        NotChecked,
+        NotInstalled,
+        Outdated,
+        UpToDate,
+        OfflineInstalled,
+        OfflineNotInstalled,
+        Downloading,
+        Verifying,
+        Installing,
+        ChecksumMismatch
+    };
 
     public delegate void StatusUpdatedEventHandler(object sender, StatusUpdatedEventArgs e);
 
@@ -51,6 +64,7 @@ namespace Galcon_2_Manager.IM
                 Directory.CreateDirectory("cache");
         }
 
+        // Downloads the checksum of the latest version and stores it in this.hashLatest
         public void getVersionInfo()
         {
             WebClient wc = new WebClient();
@@ -59,15 +73,19 @@ namespace Galcon_2_Manager.IM
             {
                 if (e.Error != null)
                 {
+                    // Error downloading the checksum, server unreachable or we're offline. Set status accordingly.
+
                     installStatus = InstallStatus.OfflineNotInstalled;
                 }
                 else
                 {
+                    // Download successful, convert byte[] to UTF8 string and save the hash to this.hashLatest.
+
                     byte[] raw = e.Result;
 
                     installStatus = InstallStatus.NotInstalled;
 
-                    this.hashLatest = System.Text.Encoding.UTF8.GetString(raw);
+                    this.hashLatest = System.Text.Encoding.UTF8.GetString(raw).Trim();
                 }
 
                 this.StatusUpdated(this, new StatusUpdatedEventArgs(installStatus));
@@ -81,12 +99,13 @@ namespace Galcon_2_Manager.IM
             if (File.Exists(@"cache\Galcon2.zip"))
             {
                 this.calculateCacheHash();
+                this.extract();
             }
             else
             {
                 WebClient wc = new WebClient();
 
-                installStatus = InstallStatus.Updating;
+                installStatus = InstallStatus.Downloading;
                 this.StatusUpdated(this, new StatusUpdatedEventArgs(installStatus, 0));
 
                 wc.DownloadProgressChanged += (object sender, DownloadProgressChangedEventArgs e) =>
@@ -96,16 +115,41 @@ namespace Galcon_2_Manager.IM
 
                 wc.DownloadFileCompleted += (object sender, System.ComponentModel.AsyncCompletedEventArgs e) =>
                 {
+                    this.installStatus = InstallStatus.Verifying;
+                    this.StatusUpdated(this, new StatusUpdatedEventArgs(installStatus));
                     this.calculateCacheHash();
+                    this.extract();
                 };
 
                 wc.DownloadFileAsync(new Uri("https://www.galcon.com/g2/files/latest/Galcon2.zip"), @"cache\Galcon2.zip");
             }
         }
 
+        private void extract(bool skipVerify = false)
+        {
+            if (skipVerify || compareHashs(this.hashCache, this.hashLatest))
+            {
+                // The downloaded file's checksum is equal to the remote checksum.
+
+                if (Directory.Exists(@"cache\Galcon2"))
+                    Directory.Delete(@"cache\Galcon2", true);
+
+                installStatus = InstallStatus.Installing;
+
+                System.IO.Compression.ZipFile.ExtractToDirectory(@"cache\Galcon2.zip", "cache");
+                Directory.Move(@"cache\Galcon2", "game");
+            }
+            else
+            {
+                // Checksums do not match, indicating a corrupted download.
+
+                installStatus = InstallStatus.ChecksumMismatch;
+            }
+        }
+
         public void update()
         {
-
+            // Will probably be removed because installing and updating is a very similar process.
         }
 
         public void uninstall()
@@ -121,6 +165,13 @@ namespace Galcon_2_Manager.IM
             fs.Position = 0;
 
             this.hashCache = BitConverter.ToString(shaChecksum.ComputeHash(fs)).Replace("-", string.Empty).ToLower();
+
+            fs.Close();
+        }
+
+        private bool compareHashs(string hashA, string hashB)
+        {
+            return hashA == hashB;
         }
     }
 }
