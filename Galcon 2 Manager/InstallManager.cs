@@ -27,7 +27,7 @@ namespace Galcon_2_Manager.IM
 
     class InstallManager
     {
-        string hashLatest;
+        string hashLatest, hashCache;
         private InstallStatus installStatus = InstallStatus.Checking;
 
         public InstallManager()
@@ -73,32 +73,34 @@ namespace Galcon_2_Manager.IM
                 this.StatusUpdated(this, new StatusUpdatedEventArgs(installStatus));
             };
 
-            wc.DownloadDataAsync(new Uri("http://localhost/g2hash.php"));
+            wc.DownloadDataAsync(new Uri("http://f00b4r.org/g2/hash/latest/windows.txt"));
         }
 
         public void install()
         {
-            WebClient wc = new WebClient();
-
-            installStatus = InstallStatus.Updating;
-            this.StatusUpdated(this, new StatusUpdatedEventArgs(installStatus, 0));
-
-            wc.DownloadProgressChanged += (object sender, DownloadProgressChangedEventArgs e) =>
+            if (File.Exists(@"cache\Galcon2.zip"))
             {
-                this.StatusUpdated(this, new StatusUpdatedEventArgs(installStatus, e.ProgressPercentage));
-            };
-
-            wc.DownloadFileCompleted += (object sender, System.ComponentModel.AsyncCompletedEventArgs e) =>
+                calculateCacheHash();
+            }
+            else
             {
-                SHA256 shaChecksum = SHA256.Create();
+                WebClient wc = new WebClient();
 
-                FileStream fs = new FileStream(@"cache\Galcon2.zip", FileMode.Open);
-                fs.Position = 0;
+                installStatus = InstallStatus.Updating;
+                this.StatusUpdated(this, new StatusUpdatedEventArgs(installStatus, 0));
 
-                string hash = BitConverter.ToString(shaChecksum.ComputeHash(fs)).Replace("-", string.Empty);
-            };
+                wc.DownloadProgressChanged += (object sender, DownloadProgressChangedEventArgs e) =>
+                {
+                    this.StatusUpdated(this, new StatusUpdatedEventArgs(installStatus, e.ProgressPercentage));
+                };
 
-            wc.DownloadFileAsync(new Uri("https://www.galcon.com/g2/files/latest/Galcon2.zip"), @"cache\Galcon2.zip");
+                wc.DownloadFileCompleted += (object sender, System.ComponentModel.AsyncCompletedEventArgs e) =>
+                {
+                    calculateCacheHash();
+                };
+
+                wc.DownloadFileAsync(new Uri("https://www.galcon.com/g2/files/latest/Galcon2.zip"), @"cache\Galcon2.zip");
+            }
         }
 
         public void update()
@@ -109,6 +111,16 @@ namespace Galcon_2_Manager.IM
         public void uninstall()
         {
 
+        }
+
+        private string calculateCacheHash()
+        {
+            SHA256 shaChecksum = SHA256.Create();
+
+            FileStream fs = new FileStream(@"cache\Galcon2.zip", FileMode.Open);
+            fs.Position = 0;
+
+            return BitConverter.ToString(shaChecksum.ComputeHash(fs)).Replace("-", string.Empty).ToLower();
         }
     }
 }
