@@ -184,14 +184,19 @@ namespace Galcon_2_Manager.IM
 
         private void calculateCacheHash()
         {
-            SHA256 shaChecksum = SHA256.Create();
+            if (File.Exists(@"cache\Galcon2.zip"))
+            {
+                SHA256 shaChecksum = SHA256.Create();
 
-            FileStream fs = new FileStream(@"cache\Galcon2.zip", FileMode.Open);
-            fs.Position = 0;
+                FileStream fs = new FileStream(@"cache\Galcon2.zip", FileMode.Open);
+                fs.Position = 0;
 
-            this.hashCache = BitConverter.ToString(shaChecksum.ComputeHash(fs)).Replace("-", string.Empty).ToLower();
+                this.hashCache = BitConverter.ToString(shaChecksum.ComputeHash(fs)).Replace("-", string.Empty).ToLower();
 
-            fs.Close();
+                fs.Close();
+            }
+            else
+                this.hashCache = "0";
         }
 
         private bool compareHashs(string hashA, string hashB)
