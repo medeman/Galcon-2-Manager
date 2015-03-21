@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.buttonTopClose = new System.Windows.Forms.Button();
             this.buttonTopMove = new System.Windows.Forms.Button();
             this.buttonTopMinimize = new System.Windows.Forms.Button();
@@ -225,6 +226,7 @@
             this.Controls.Add(this.buttonTopMove);
             this.Controls.Add(this.buttonTopClose);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Main";
             this.Text = "Galcon 2 Manager";
             this.groupBoxInstall.ResumeLayout(false);
