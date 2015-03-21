@@ -24,6 +24,7 @@ namespace Galcon_2_Manager
         // Saves the configuration to the configuration file.
         private void buttonSave_Click(object sender, EventArgs e)
         {
+            // Map configuration keys to values entered in the form.
             Dictionary<string, string> mapping = new Dictionary<string, string>
             {
                 {"downloadUrl", textBoxSettingDownloadUrl.Text},
@@ -32,14 +33,31 @@ namespace Galcon_2_Manager
 
             Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
 
+            // Iterate through all configuration keys in mapping and verify and save their values.
             foreach (KeyValuePair<string, string> entry in mapping)
             {
+                // Verify the values entered in the form and if one is invalid return (=> don't save).
+                switch (entry.Key)
+                {
+                    case "downloadUrl":
+                    case "hashLatestUrl":
+                        // These values need to be a valid url.
+                        if (!Uri.IsWellFormedUriString(entry.Value, UriKind.Absolute))
+                        {
+                            MessageBox.Show(entry.Key + " value invalid (needs to be a valid URL).");
+                            return;
+                        }
+                        break;
+                }
+
+                // Update configuration key if it exists, else create it.
                 if (config.AppSettings.Settings[entry.Key] != null)
                     config.AppSettings.Settings[entry.Key].Value = entry.Value;
                 else
                     config.AppSettings.Settings.Add(entry.Key, entry.Value);
             }
 
+            // Save updated configuration to disk.
             config.Save(ConfigurationSaveMode.Modified);
 
             this.Close();
