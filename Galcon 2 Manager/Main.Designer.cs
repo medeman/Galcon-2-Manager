@@ -32,7 +32,6 @@
             this.buttonTopMove = new System.Windows.Forms.Button();
             this.buttonTopMinimize = new System.Windows.Forms.Button();
             this.groupBoxInstall = new System.Windows.Forms.GroupBox();
-            this.labelInstallHint = new System.Windows.Forms.Label();
             this.buttonInstallRemove = new System.Windows.Forms.Button();
             this.labelInstallStatus = new System.Windows.Forms.Label();
             this.buttonInstallUpdate = new System.Windows.Forms.Button();
@@ -89,28 +88,18 @@
             // groupBoxInstall
             // 
             this.groupBoxInstall.BackColor = System.Drawing.Color.Transparent;
-            this.groupBoxInstall.Controls.Add(this.labelInstallHint);
             this.groupBoxInstall.Controls.Add(this.buttonInstallRemove);
             this.groupBoxInstall.Controls.Add(this.labelInstallStatus);
             this.groupBoxInstall.Controls.Add(this.buttonInstallUpdate);
             this.groupBoxInstall.Controls.Add(this.buttonInstall);
             this.groupBoxInstall.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBoxInstall.ForeColor = System.Drawing.Color.White;
-            this.groupBoxInstall.Location = new System.Drawing.Point(12, 314);
+            this.groupBoxInstall.Location = new System.Drawing.Point(12, 354);
             this.groupBoxInstall.Name = "groupBoxInstall";
-            this.groupBoxInstall.Size = new System.Drawing.Size(200, 174);
+            this.groupBoxInstall.Size = new System.Drawing.Size(200, 134);
             this.groupBoxInstall.TabIndex = 3;
             this.groupBoxInstall.TabStop = false;
             this.groupBoxInstall.Text = "Installation";
-            // 
-            // labelInstallHint
-            // 
-            this.labelInstallHint.Location = new System.Drawing.Point(6, 126);
-            this.labelInstallHint.Name = "labelInstallHint";
-            this.labelInstallHint.Size = new System.Drawing.Size(188, 39);
-            this.labelInstallHint.TabIndex = 7;
-            this.labelInstallHint.Text = "A new version is available. Click \'Update\' to install.";
-            this.labelInstallHint.Visible = false;
             // 
             // buttonInstallRemove
             // 
@@ -255,7 +244,6 @@
         private System.Windows.Forms.Button buttonInstall;
         private System.Windows.Forms.Button buttonInstallRemove;
         private System.Windows.Forms.Button buttonInstallUpdate;
-        private System.Windows.Forms.Label labelInstallHint;
         private System.Windows.Forms.WebBrowser webBrowserNews;
         private System.Windows.Forms.Label labelTitle;
         private System.Windows.Forms.Panel panel1;
