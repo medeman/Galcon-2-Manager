@@ -144,7 +144,7 @@ namespace Galcon_2_Manager
             HtmlElement linkElement = webBrowserNews.Document.CreateElement("link");
 
             linkElement.SetAttribute("rel", "stylesheet");
-            linkElement.SetAttribute("href", "http://localhost/g2manager-news.css");
+            linkElement.SetAttribute("href", "https://f00b4r.org/g2/manager/g2manager-news.css");
 
             head.AppendChild(linkElement);
         }
