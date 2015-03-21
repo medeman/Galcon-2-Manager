@@ -104,7 +104,7 @@ namespace Galcon_2_Manager.IM
                 this.sendStatusUpdatedEvent();
             };
 
-            wc.DownloadDataAsync(new Uri(ConfigurationManager.AppSettings["hashLatestUrl"]));
+            wc.DownloadDataAsync(new Uri(Settings.getConfigKey("hashLatestUrl")));
         }
 
         // Installs the game (and downloads it if Galcon2.zip is not in the cache folder).
@@ -140,7 +140,7 @@ namespace Galcon_2_Manager.IM
                     this.extract();
                 };
 
-                wc.DownloadFileAsync(new Uri(ConfigurationManager.AppSettings["downloadUrl"]), @"cache\Galcon2.zip");
+                wc.DownloadFileAsync(new Uri(Settings.getConfigKey("downloadUrl")), @"cache\Galcon2.zip");
             }
         }
 

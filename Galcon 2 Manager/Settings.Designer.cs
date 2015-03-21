@@ -33,6 +33,7 @@
             this.textBoxSettingHashLatestUrl = new System.Windows.Forms.TextBox();
             this.textBoxSettingDownloadUrl = new System.Windows.Forms.TextBox();
             this.buttonSave = new System.Windows.Forms.Button();
+            this.labelRestartHint = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // labelSettingHashLatestUrl
@@ -77,11 +78,21 @@
             this.buttonSave.UseVisualStyleBackColor = true;
             this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
             // 
+            // labelRestartHint
+            // 
+            this.labelRestartHint.AutoSize = true;
+            this.labelRestartHint.Location = new System.Drawing.Point(12, 171);
+            this.labelRestartHint.Name = "labelRestartHint";
+            this.labelRestartHint.Size = new System.Drawing.Size(342, 13);
+            this.labelRestartHint.TabIndex = 5;
+            this.labelRestartHint.Text = "You may need to restart the application for some settings to take effect.";
+            // 
             // Settings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(522, 201);
+            this.Controls.Add(this.labelRestartHint);
             this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.textBoxSettingDownloadUrl);
             this.Controls.Add(this.textBoxSettingHashLatestUrl);
@@ -104,5 +115,6 @@
         private System.Windows.Forms.TextBox textBoxSettingHashLatestUrl;
         private System.Windows.Forms.TextBox textBoxSettingDownloadUrl;
         private System.Windows.Forms.Button buttonSave;
+        private System.Windows.Forms.Label labelRestartHint;
     }
 }

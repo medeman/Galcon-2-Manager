@@ -207,6 +207,7 @@ namespace Galcon_2_Manager
         {
             Settings settings = new Settings();
 
+            settings.StartPosition = FormStartPosition.CenterParent;
             settings.ShowDialog();
         }
     }
