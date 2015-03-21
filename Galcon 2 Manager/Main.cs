@@ -201,5 +201,13 @@ namespace Galcon_2_Manager
                 MessageBox.Show(utils.deleteConfig() ? "Configuration deleted." : "No configuration was found.");
             }
         }
+
+        // Open the settings form
+        private void buttonTopSettings_Click(object sender, EventArgs e)
+        {
+            Settings settings = new Settings();
+
+            settings.ShowDialog();
+        }
     }
 }

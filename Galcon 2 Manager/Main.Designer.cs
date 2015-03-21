@@ -43,6 +43,7 @@
             this.buttonLaunch = new System.Windows.Forms.Button();
             this.groupBoxUtilities = new System.Windows.Forms.GroupBox();
             this.buttonUtilityDeleteConfig = new System.Windows.Forms.Button();
+            this.buttonTopSettings = new System.Windows.Forms.Button();
             this.groupBoxInstall.SuspendLayout();
             this.groupBoxUtilities.SuspendLayout();
             this.SuspendLayout();
@@ -242,6 +243,20 @@
             this.buttonUtilityDeleteConfig.UseVisualStyleBackColor = false;
             this.buttonUtilityDeleteConfig.Click += new System.EventHandler(this.buttonUtilityDeleteConfig_Click);
             // 
+            // buttonTopSettings
+            // 
+            this.buttonTopSettings.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.buttonTopSettings.BackgroundImage = global::Galcon_2_Manager.Properties.Resources.button_settings;
+            this.buttonTopSettings.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.buttonTopSettings.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonTopSettings.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.buttonTopSettings.Location = new System.Drawing.Point(742, 12);
+            this.buttonTopSettings.Name = "buttonTopSettings";
+            this.buttonTopSettings.Size = new System.Drawing.Size(32, 32);
+            this.buttonTopSettings.TabIndex = 11;
+            this.buttonTopSettings.UseVisualStyleBackColor = false;
+            this.buttonTopSettings.Click += new System.EventHandler(this.buttonTopSettings_Click);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -249,6 +264,7 @@
             this.BackgroundImage = global::Galcon_2_Manager.Properties.Resources.background_main;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(900, 500);
+            this.Controls.Add(this.buttonTopSettings);
             this.Controls.Add(this.groupBoxUtilities);
             this.Controls.Add(this.buttonLaunch);
             this.Controls.Add(this.labelTitle);
@@ -286,6 +302,7 @@
         private System.Windows.Forms.Button buttonLaunch;
         private System.Windows.Forms.GroupBox groupBoxUtilities;
         private System.Windows.Forms.Button buttonUtilityDeleteConfig;
+        private System.Windows.Forms.Button buttonTopSettings;
     }
 }
 
