@@ -185,7 +185,7 @@
             this.labelTitle.Name = "labelTitle";
             this.labelTitle.Size = new System.Drawing.Size(173, 24);
             this.labelTitle.TabIndex = 8;
-            this.labelTitle.Text = "Manager 0.1-beta";
+            this.labelTitle.Text = "Manager 0.2-beta";
             // 
             // panel1
             // 
