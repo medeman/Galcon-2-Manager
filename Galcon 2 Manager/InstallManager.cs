@@ -74,23 +74,32 @@ namespace Galcon_2_Manager.IM
                 {
                     // Error downloading the checksum, server unreachable or we're offline. Set status accordingly.
 
-                    installStatus = InstallStatus.OfflineNotInstalled;
+                    if (File.Exists(@"game\Galcon2.exe"))
+                        installStatus = InstallStatus.OfflineInstalled;
+                    else
+                        installStatus = InstallStatus.OfflineNotInstalled;
                 }
                 else
                 {
                     // Download successful, convert byte[] to UTF8 string and save the hash to this.hashLatest.
 
                     byte[] raw = e.Result;
-
-                    installStatus = InstallStatus.NotInstalled;
-
                     this.hashLatest = System.Text.Encoding.UTF8.GetString(raw).Trim();
+
+                    this.calculateCacheHash();
+
+                    if (this.hashLatest == this.hashCache && File.Exists(@"game\Galcon2.exe"))
+                        installStatus = InstallStatus.UpToDate;
+                    else if (File.Exists(@"game\Galcon2.exe"))
+                        installStatus = InstallStatus.Outdated;
+                    else
+                        installStatus = InstallStatus.NotInstalled;
                 }
 
                 this.sendStatusUpdatedEvent();
             };
 
-            wc.DownloadDataAsync(new Uri("http://f00b4r.org/g2/hash/latest/windows.txt"));
+            wc.DownloadDataAsync(new Uri("https://f00b4r.org/g2/hash/latest/windows.txt"));
         }
 
         public void install()
@@ -137,6 +146,7 @@ namespace Galcon_2_Manager.IM
                 this.sendStatusUpdatedEvent();
 
                 System.IO.Compression.ZipFile.ExtractToDirectory(@"cache\Galcon2.zip", "cache");
+                this.uninstall(false);
                 Directory.Move(@"cache\Galcon2", "game");
 
                 installStatus = InstallStatus.UpToDate;
@@ -153,14 +163,23 @@ namespace Galcon_2_Manager.IM
         public void update()
         {
             // Will probably be removed because installing and updating is a very similar process.
+            if (File.Exists(@"cache\Galcon2.zip"))
+                File.Delete(@"cache\Galcon2.zip");
+            this.install();
         }
 
-        public void uninstall()
+        public void uninstall(bool changeStatus = true)
         {
             // Delete the game folder (we should probably clear the cache folder as well?).
 
             if (Directory.Exists("game"))
                 Directory.Delete("game", true);
+
+            if (changeStatus)
+            {
+                installStatus = InstallStatus.NotInstalled;
+                this.sendStatusUpdatedEvent();
+            }
         }
 
         private void calculateCacheHash()
