@@ -14,6 +14,7 @@ namespace Galcon_2_Manager
 {
     public partial class Main : Form
     {
+        // Code for moving the window without the title bar.
         public const int WM_NCLBUTTONDOWN = 0xA1;
         public const int HT_CAPTION = 0x2;
         [DllImportAttribute("user32.dll")]
@@ -117,6 +118,7 @@ namespace Galcon_2_Manager
             im.getVersionInfo();
         }
 
+        // Handle window movement.
         private void buttonTopMove_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
@@ -126,16 +128,19 @@ namespace Galcon_2_Manager
             }
         }
 
+        // Minimizes the window.
         private void buttonTopMinimize_Click(object sender, EventArgs e)
         {
             WindowState = FormWindowState.Minimized;
         }
 
+        // Closes the application.
         private void buttonTopClose_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
 
+        // Injects CSS (and JS) to format the news page properly.
         private void webBrowserNews_Navigated(object sender, WebBrowserNavigatedEventArgs e)
         {
             webBrowserNews.Document.CreateElement("style");
@@ -149,16 +154,19 @@ namespace Galcon_2_Manager
             head.AppendChild(linkElement);
         }
 
+        // Installs the game using InstallManager.
         private void buttonInstall_Click(object sender, EventArgs e)
         {
             im.install();
         }
 
+        // Updates the game using InstallManager.
         private void buttonInstallUpdate_Click(object sender, EventArgs e)
         {
             im.update();
         }
 
+        // Uninstalls the game using InstallManager.
         private void buttonInstallRemove_Click(object sender, EventArgs e)
         {
             DialogResult remove = MessageBox.Show("Do you want to uninstall Galcon 2?", "Confirm", MessageBoxButtons.YesNo);
@@ -167,11 +175,13 @@ namespace Galcon_2_Manager
                 im.uninstall();
         }
 
+        // Launches the game using InstallManager.
         private void buttonLaunch_Click(object sender, EventArgs e)
         {
             im.launch();
         }
 
+        // Change button picture for launch button for enabled and disabled states.
         private void buttonLaunch_EnabledChanged(object sender, EventArgs e)
         {
             if (buttonLaunch.Enabled)
