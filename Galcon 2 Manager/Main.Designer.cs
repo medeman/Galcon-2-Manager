@@ -110,6 +110,7 @@
             this.labelInstallHint.Size = new System.Drawing.Size(188, 39);
             this.labelInstallHint.TabIndex = 7;
             this.labelInstallHint.Text = "A new version is available. Click \'Update\' to install.";
+            this.labelInstallHint.Visible = false;
             // 
             // buttonInstallRemove
             // 
