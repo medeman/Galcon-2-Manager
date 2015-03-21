@@ -189,9 +189,9 @@
             this.labelTitle.ForeColor = System.Drawing.Color.White;
             this.labelTitle.Location = new System.Drawing.Point(201, 14);
             this.labelTitle.Name = "labelTitle";
-            this.labelTitle.Size = new System.Drawing.Size(92, 24);
+            this.labelTitle.Size = new System.Drawing.Size(173, 24);
             this.labelTitle.TabIndex = 8;
-            this.labelTitle.Text = "Manager";
+            this.labelTitle.Text = "Manager 0.1-beta";
             // 
             // panel1
             // 
