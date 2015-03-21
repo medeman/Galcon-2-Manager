@@ -50,7 +50,7 @@
             this.buttonTopClose.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.buttonTopClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonTopClose.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.buttonTopClose.Location = new System.Drawing.Point(756, 12);
+            this.buttonTopClose.Location = new System.Drawing.Point(856, 12);
             this.buttonTopClose.Name = "buttonTopClose";
             this.buttonTopClose.Size = new System.Drawing.Size(32, 32);
             this.buttonTopClose.TabIndex = 0;
@@ -64,7 +64,7 @@
             this.buttonTopMove.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.buttonTopMove.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonTopMove.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.buttonTopMove.Location = new System.Drawing.Point(680, 12);
+            this.buttonTopMove.Location = new System.Drawing.Point(780, 12);
             this.buttonTopMove.Name = "buttonTopMove";
             this.buttonTopMove.Size = new System.Drawing.Size(32, 32);
             this.buttonTopMove.TabIndex = 1;
@@ -78,7 +78,7 @@
             this.buttonTopMinimize.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.buttonTopMinimize.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonTopMinimize.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.buttonTopMinimize.Location = new System.Drawing.Point(718, 12);
+            this.buttonTopMinimize.Location = new System.Drawing.Point(818, 12);
             this.buttonTopMinimize.Name = "buttonTopMinimize";
             this.buttonTopMinimize.Size = new System.Drawing.Size(32, 32);
             this.buttonTopMinimize.TabIndex = 2;
@@ -166,7 +166,7 @@
             this.webBrowserNews.Location = new System.Drawing.Point(218, 50);
             this.webBrowserNews.MinimumSize = new System.Drawing.Size(20, 20);
             this.webBrowserNews.Name = "webBrowserNews";
-            this.webBrowserNews.Size = new System.Drawing.Size(570, 438);
+            this.webBrowserNews.Size = new System.Drawing.Size(670, 438);
             this.webBrowserNews.TabIndex = 4;
             this.webBrowserNews.Url = new System.Uri("http://www.galcon.com/news/category/galcon2/", System.UriKind.Absolute);
             this.webBrowserNews.Navigated += new System.Windows.Forms.WebBrowserNavigatedEventHandler(this.webBrowserNews_Navigated);
@@ -177,7 +177,7 @@
             this.labelTitle.BackColor = System.Drawing.Color.Transparent;
             this.labelTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelTitle.ForeColor = System.Drawing.Color.White;
-            this.labelTitle.Location = new System.Drawing.Point(201, 14);
+            this.labelTitle.Location = new System.Drawing.Point(214, 14);
             this.labelTitle.Name = "labelTitle";
             this.labelTitle.Size = new System.Drawing.Size(173, 24);
             this.labelTitle.TabIndex = 8;
@@ -188,9 +188,9 @@
             this.panel1.BackColor = System.Drawing.Color.Transparent;
             this.panel1.BackgroundImage = global::Galcon_2_Manager.Properties.Resources.logo;
             this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.panel1.Location = new System.Drawing.Point(21, 12);
+            this.panel1.Location = new System.Drawing.Point(12, 12);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(174, 46);
+            this.panel1.Size = new System.Drawing.Size(200, 71);
             this.panel1.TabIndex = 5;
             // 
             // buttonLaunch
@@ -215,7 +215,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::Galcon_2_Manager.Properties.Resources.background_main;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.ClientSize = new System.Drawing.Size(800, 500);
+            this.ClientSize = new System.Drawing.Size(900, 500);
             this.Controls.Add(this.buttonLaunch);
             this.Controls.Add(this.labelTitle);
             this.Controls.Add(this.panel1);
