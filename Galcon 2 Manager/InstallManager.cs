@@ -49,6 +49,7 @@ namespace Galcon_2_Manager.IM
             
         }
 
+        // Initializes the InstallManager class.
         public void init()
         {
             this.sendStatusUpdatedEvent();
@@ -57,13 +58,14 @@ namespace Galcon_2_Manager.IM
 
         public event StatusUpdatedEventHandler StatusUpdated;
 
+        // Prepares the directory structure Galcon 2 Manager uses if it doesn't exist yet.
         private void prepare()
         {
             if (!Directory.Exists("cache"))
                 Directory.CreateDirectory("cache");
         }
 
-        // Downloads the checksum of the latest version and stores it in this.hashLatest
+        // Downloads the checksum of the latest version and stores it in this.hashLatest.
         public void getVersionInfo()
         {
             WebClient wc = new WebClient();
@@ -86,11 +88,13 @@ namespace Galcon_2_Manager.IM
                     byte[] raw = e.Result;
                     this.hashLatest = System.Text.Encoding.UTF8.GetString(raw).Trim();
 
+                    // Calculate the hash of the Galcon2.zip in cache to compare it with the hash returned from the server.
                     this.calculateCacheHash();
 
-                    if (this.hashLatest == this.hashCache && File.Exists(@"game\Galcon2.exe"))
+                    if (this.compareHashs(this.hashLatest, this.hashCache) && File.Exists(@"game\Galcon2.exe"))
                         installStatus = InstallStatus.UpToDate;
                     else if (File.Exists(@"game\Galcon2.exe"))
+                        // Hashs do not match, but the game is installed - it's likely outdated.
                         installStatus = InstallStatus.Outdated;
                     else
                         installStatus = InstallStatus.NotInstalled;
@@ -102,11 +106,16 @@ namespace Galcon_2_Manager.IM
             wc.DownloadDataAsync(new Uri("https://f00b4r.org/g2/hash/latest/windows.txt"));
         }
 
+        // Installs the game (and downloads it if Galcon2.zip is not in the cache folder).
         public void install()
         {
+            // Check if there is a Galcon2.zip in the cache folder and calculate its checksum.
             if (File.Exists(@"cache\Galcon2.zip"))
-            {
                 this.calculateCacheHash();
+
+            // If checksums match, extract the existing version of Galcon2.zip, else download it.
+            if (this.compareHashs(this.hashCache, this.hashLatest))
+            {
                 this.extract();
             }
             else
@@ -116,6 +125,7 @@ namespace Galcon_2_Manager.IM
                 installStatus = InstallStatus.Downloading;
                 this.StatusUpdated(this, new StatusUpdatedEventArgs(installStatus, 0));
 
+                // Send StatusUpdated event with download progress percentage.
                 wc.DownloadProgressChanged += (object sender, DownloadProgressChangedEventArgs e) =>
                 {
                     this.StatusUpdated(this, new StatusUpdatedEventArgs(installStatus, e.ProgressPercentage));
@@ -133,6 +143,7 @@ namespace Galcon_2_Manager.IM
             }
         }
 
+        // Extract Galcon2.zip from cache to the game folder.
         private void extract(bool skipVerify = false)
         {
             if (skipVerify || compareHashs(this.hashCache, this.hashLatest))
@@ -160,14 +171,15 @@ namespace Galcon_2_Manager.IM
             }
         }
 
+        // Updates an existing installation (by deleting Galcon2.zip in the cache folder and starting the install process).
         public void update()
         {
-            // Will probably be removed because installing and updating is a very similar process.
             if (File.Exists(@"cache\Galcon2.zip"))
                 File.Delete(@"cache\Galcon2.zip");
             this.install();
         }
 
+        // Uninstalls the game. Set changeStatus to false to prevent a status update.
         public void uninstall(bool changeStatus = true)
         {
             // Delete the game folder (we should probably clear the cache folder as well?).
@@ -182,6 +194,7 @@ namespace Galcon_2_Manager.IM
             }
         }
 
+        // Calculates the hash of Galcon2.zip in the cache folder and saves it to this.hashCache.
         private void calculateCacheHash()
         {
             if (File.Exists(@"cache\Galcon2.zip"))
@@ -199,16 +212,19 @@ namespace Galcon_2_Manager.IM
                 this.hashCache = "0";
         }
 
+        // Compares two SHA256 hashes.
         private bool compareHashs(string hashA, string hashB)
         {
             return hashA == hashB;
         }
 
+        // Triggers the StatusUpdated event with installStatus.
         private void sendStatusUpdatedEvent()
         {
             this.StatusUpdated(this, new StatusUpdatedEventArgs(installStatus));
         }
 
+        // Launches the game.
         public void launch()
         {
             ProcessStartInfo startInfo = new ProcessStartInfo();
