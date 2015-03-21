@@ -41,6 +41,7 @@
             this.labelTitle = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.buttonLaunch = new System.Windows.Forms.Button();
+            this.groupBoxUtilities = new System.Windows.Forms.GroupBox();
             this.groupBoxInstall.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -202,13 +203,25 @@
             this.buttonLaunch.Enabled = false;
             this.buttonLaunch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonLaunch.ForeColor = System.Drawing.Color.Transparent;
-            this.buttonLaunch.Location = new System.Drawing.Point(46, 180);
+            this.buttonLaunch.Location = new System.Drawing.Point(46, 116);
             this.buttonLaunch.Name = "buttonLaunch";
             this.buttonLaunch.Size = new System.Drawing.Size(128, 128);
             this.buttonLaunch.TabIndex = 9;
             this.buttonLaunch.UseVisualStyleBackColor = false;
             this.buttonLaunch.EnabledChanged += new System.EventHandler(this.buttonLaunch_EnabledChanged);
             this.buttonLaunch.Click += new System.EventHandler(this.buttonLaunch_Click);
+            // 
+            // groupBoxUtilities
+            // 
+            this.groupBoxUtilities.BackColor = System.Drawing.Color.Transparent;
+            this.groupBoxUtilities.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBoxUtilities.ForeColor = System.Drawing.Color.White;
+            this.groupBoxUtilities.Location = new System.Drawing.Point(12, 276);
+            this.groupBoxUtilities.Name = "groupBoxUtilities";
+            this.groupBoxUtilities.Size = new System.Drawing.Size(200, 72);
+            this.groupBoxUtilities.TabIndex = 10;
+            this.groupBoxUtilities.TabStop = false;
+            this.groupBoxUtilities.Text = "Utilities";
             // 
             // Main
             // 
@@ -217,6 +230,7 @@
             this.BackgroundImage = global::Galcon_2_Manager.Properties.Resources.background_main;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(900, 500);
+            this.Controls.Add(this.groupBoxUtilities);
             this.Controls.Add(this.buttonLaunch);
             this.Controls.Add(this.labelTitle);
             this.Controls.Add(this.panel1);
@@ -250,6 +264,7 @@
         private System.Windows.Forms.Label labelTitle;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button buttonLaunch;
+        private System.Windows.Forms.GroupBox groupBoxUtilities;
     }
 }
 
