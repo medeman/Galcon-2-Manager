@@ -42,7 +42,9 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.buttonLaunch = new System.Windows.Forms.Button();
             this.groupBoxUtilities = new System.Windows.Forms.GroupBox();
+            this.buttonUtilityDeleteConfig = new System.Windows.Forms.Button();
             this.groupBoxInstall.SuspendLayout();
+            this.groupBoxUtilities.SuspendLayout();
             this.SuspendLayout();
             // 
             // buttonTopClose
@@ -214,14 +216,31 @@
             // groupBoxUtilities
             // 
             this.groupBoxUtilities.BackColor = System.Drawing.Color.Transparent;
+            this.groupBoxUtilities.Controls.Add(this.buttonUtilityDeleteConfig);
             this.groupBoxUtilities.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBoxUtilities.ForeColor = System.Drawing.Color.White;
-            this.groupBoxUtilities.Location = new System.Drawing.Point(12, 276);
+            this.groupBoxUtilities.Location = new System.Drawing.Point(12, 292);
             this.groupBoxUtilities.Name = "groupBoxUtilities";
-            this.groupBoxUtilities.Size = new System.Drawing.Size(200, 72);
+            this.groupBoxUtilities.Size = new System.Drawing.Size(200, 56);
             this.groupBoxUtilities.TabIndex = 10;
             this.groupBoxUtilities.TabStop = false;
             this.groupBoxUtilities.Text = "Utilities";
+            // 
+            // buttonUtilityDeleteConfig
+            // 
+            this.buttonUtilityDeleteConfig.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.buttonUtilityDeleteConfig.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.buttonUtilityDeleteConfig.Cursor = System.Windows.Forms.Cursors.Default;
+            this.buttonUtilityDeleteConfig.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonUtilityDeleteConfig.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonUtilityDeleteConfig.ForeColor = System.Drawing.Color.White;
+            this.buttonUtilityDeleteConfig.Location = new System.Drawing.Point(9, 22);
+            this.buttonUtilityDeleteConfig.Name = "buttonUtilityDeleteConfig";
+            this.buttonUtilityDeleteConfig.Size = new System.Drawing.Size(96, 24);
+            this.buttonUtilityDeleteConfig.TabIndex = 7;
+            this.buttonUtilityDeleteConfig.Text = "Delete config";
+            this.buttonUtilityDeleteConfig.UseVisualStyleBackColor = false;
+            this.buttonUtilityDeleteConfig.Click += new System.EventHandler(this.buttonUtilityDeleteConfig_Click);
             // 
             // Main
             // 
@@ -245,6 +264,7 @@
             this.Text = "Galcon 2 Manager";
             this.groupBoxInstall.ResumeLayout(false);
             this.groupBoxInstall.PerformLayout();
+            this.groupBoxUtilities.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -265,6 +285,7 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button buttonLaunch;
         private System.Windows.Forms.GroupBox groupBoxUtilities;
+        private System.Windows.Forms.Button buttonUtilityDeleteConfig;
     }
 }
 

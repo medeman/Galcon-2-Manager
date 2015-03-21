@@ -23,6 +23,7 @@ namespace Galcon_2_Manager
         public static extern bool ReleaseCapture();
 
         InstallManager im = new InstallManager();
+        Utilities utils = new Utilities();
 
         public Main()
         {
@@ -188,6 +189,17 @@ namespace Galcon_2_Manager
                 buttonLaunch.BackgroundImage = Galcon_2_Manager.Properties.Resources.button_launch;
             else
                 buttonLaunch.BackgroundImage = Galcon_2_Manager.Properties.Resources.button_launch_disabled;
+        }
+
+        // Deletes the configuration files of Galcon 2 after confirmation.
+        private void buttonUtilityDeleteConfig_Click(object sender, EventArgs e)
+        {
+            DialogResult deleteConfig = MessageBox.Show("This will delete your configuration (settings like video, audio, account data). Proceed?", "Confirm", MessageBoxButtons.YesNo);
+
+            if (deleteConfig == DialogResult.Yes)
+            {
+                MessageBox.Show(utils.deleteConfig() ? "Configuration deleted." : "No configuration was found.");
+            }
         }
     }
 }
