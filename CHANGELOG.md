@@ -1,3 +1,8 @@
+###0.3-beta
+* Added a settings screen.
+  * Set the location to download Galcon 2 from.
+  * Set the location to download version information from.
+
 ###0.2-beta
 * Updated layout.
 * Added icon.
