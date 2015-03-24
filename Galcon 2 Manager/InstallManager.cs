@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Diagnostics;
 using System.Security.Cryptography;
+using System.Configuration;
 
 namespace Galcon_2_Manager.IM
 {
@@ -103,7 +104,7 @@ namespace Galcon_2_Manager.IM
                 this.sendStatusUpdatedEvent();
             };
 
-            wc.DownloadDataAsync(new Uri("https://f00b4r.org/g2/hash/latest/windows.txt"));
+            wc.DownloadDataAsync(new Uri(Settings.getConfigKey("hashLatestUrl")));
         }
 
         // Installs the game (and downloads it if Galcon2.zip is not in the cache folder).
@@ -139,7 +140,7 @@ namespace Galcon_2_Manager.IM
                     this.extract();
                 };
 
-                wc.DownloadFileAsync(new Uri("https://www.galcon.com/g2/files/latest/Galcon2.zip"), @"cache\Galcon2.zip");
+                wc.DownloadFileAsync(new Uri(Settings.getConfigKey("downloadUrl")), @"cache\Galcon2.zip");
             }
         }
 
